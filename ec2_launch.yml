@@ -1,0 +1,19 @@
+---
+  - hosts:
+      - localhost
+    connection: local 
+    tasks:
+    - name: launch ec2
+      ec2:
+        count: 3
+        key_name: adhoc
+        instance_type: t2.micro
+        image: ami-0a00ce72
+        wait: yes
+        region: us-west-2
+      register: ec2
+    - name: Show instance id
+      debug:
+        msg: ">> {{ ec2.instance_ids[0]  }}"
+
+...
